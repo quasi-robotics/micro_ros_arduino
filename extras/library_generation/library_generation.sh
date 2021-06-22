@@ -28,7 +28,8 @@ curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /us
 rm /etc/apt/sources.list.d/*
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
-apt update
+apt update 
+apt upgrade -y
 
 cd /uros_ws
 
