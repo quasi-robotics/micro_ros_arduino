@@ -14,6 +14,7 @@ Supported boards are:
 | [Teensy 4.1](https://www.pjrc.com/store/teensy41.html)                              | v1.8.5      | Supported  | [Based on Teensyduino](https://www.pjrc.com/teensy/td_download.html)                                | `colcon.meta`            |
 | [Teensy 3.2/3.1](https://www.pjrc.com/store/teensy32.html)                          | v1.8.5      | Supported  | [Based on Teensyduino](https://www.pjrc.com/teensy/td_download.html)                                | `colcon_lowmem.meta`     |
 | [Teensy 3.5](https://www.pjrc.com/store/teensy35.html)                              | v1.8.5      | Not tested | [Based on Teensyduino](https://www.pjrc.com/teensy/td_download.html)                                | `colcon_lowmem.meta`     |
+| [STM32 Nucleo F767ZI](https://www.st.com/en/evaluation-tools/nucleo-f767zi.html |             | Not tested |                                                                                                         | `colcon.meta       `     |
 
 Community contributed boards are:
 
@@ -27,7 +28,7 @@ You can find the available precompiled ROS 2 types for messages and services in 
 
 ## How to use the precompiled library
 
-Go to [link to release section](https://github.com/micro-ROS/micro_ros_arduino/releases) and download the last release of micro-ROS library for Arduino. 
+Go to [link to release section](https://github.com/quasi-robotics/micro_ros_arduino/releases) and download the last release of micro-ROS library for Arduino. 
 
 Include it in your proyect using `Sketch -> Include library -> Add .ZIP Library...`
 
