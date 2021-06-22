@@ -11,14 +11,14 @@ done
 
 if [ $OPTIND -eq 1 ]; then 
     PLATFORMS+=("nucleo-f767zi")
-#    PLATFORMS+=("opencr1")
-#    PLATFORMS+=("teensy4")
-#    PLATFORMS+=("teensy32")
-#    PLATFORMS+=("teensy35")
-#    PLATFORMS+=("cortex_m0")
-#    PLATFORMS+=("cortex_m3")
-#    # PLATFORMS+=("portenta-m4")
-#    PLATFORMS+=("portenta-m7")
+    PLATFORMS+=("opencr1")
+    PLATFORMS+=("teensy4")
+    PLATFORMS+=("teensy32")
+    PLATFORMS+=("teensy35")
+    PLATFORMS+=("cortex_m0")
+    PLATFORMS+=("cortex_m3")
+    # PLATFORMS+=("portenta-m4")
+    PLATFORMS+=("portenta-m7")
 fi
 
 shift $((OPTIND-1))
