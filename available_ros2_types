@@ -217,6 +217,12 @@ example_interfaces/Float64.msg
 example_interfaces/MultiArrayLayout.msg
 example_interfaces/Int64MultiArray.msg
 example_interfaces/Fibonacci.action
+turtlebot3_msgs/Sound.srv
+turtlebot3_msgs/Dqn.srv
+turtlebot3_msgs/VersionInfo.msg
+turtlebot3_msgs/Sound.msg
+turtlebot3_msgs/SensorState.msg
+turtlebot3_msgs/Patrol.action
 control_msgs/QueryCalibrationState.srv
 control_msgs/QueryTrajectoryState.srv
 control_msgs/JointTrajectoryControllerState.msg
