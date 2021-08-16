@@ -10,6 +10,7 @@ while getopts "p:" o; do
 done
 
 if [ $OPTIND -eq 1 ]; then
+    PLATFORMS+=("nucleo-f767zi")
     PLATFORMS+=("opencr1")
     PLATFORMS+=("teensy4")
     PLATFORMS+=("teensy32")
@@ -23,8 +24,12 @@ fi
 shift $((OPTIND-1))
 
 ######## Init ########
+curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+rm /etc/apt/sources.list.d/*
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
-apt update
+apt update 
+apt upgrade -y
 
 cd /uros_ws
 
@@ -58,6 +63,20 @@ touch firmware/mcu_ws/ros2/example_interfaces/COLCON_IGNORE;
 ######## Clean and source ########
 find /project/src/ ! -name micro_ros_arduino.h ! -name *.c ! -name *.cpp ! -name *.c.in -delete
 
+######## Build for STM32 Nucleo F767ZI  ########
+if [[ " ${PLATFORMS[@]} " =~ " nucleo-f767zi " ]]; then
+    rm -rf firmware/build
+
+    export TOOLCHAIN_PREFIX=/uros_ws/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-
+    ros2 run micro_ros_setup build_firmware.sh /project/extras/library_generation/nucleo-f767zi_toolchain.cmake /project/extras/library_generation/colcon.meta
+
+    find firmware/build/include/ -name "*.c"  -delete
+    cp -R firmware/build/include/* /project/src/
+
+    mkdir -p /project/src/cortex-m7/fpv4-sp-d16-hard
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv4-sp-d16-hard/libmicroros.a
+fi
+
 ######## Build for OpenCR  ########
 if [[ " ${PLATFORMS[@]} " =~ " opencr1 " ]]; then
     rm -rf firmware/build
@@ -66,7 +85,7 @@ if [[ " ${PLATFORMS[@]} " =~ " opencr1 " ]]; then
     ros2 run micro_ros_setup build_firmware.sh /project/extras/library_generation/opencr_toolchain.cmake /project/extras/library_generation/colcon.meta
 
     find firmware/build/include/ -name "*.c"  -delete
-    cp -R firmware/build/include/* /project/src/
+    cp -R firmware/build/include/* /project/src/ 
 
     mkdir -p /project/src/cortex-m7/fpv5-sp-d16-softfp
     cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv5-sp-d16-softfp/libmicroros.a
